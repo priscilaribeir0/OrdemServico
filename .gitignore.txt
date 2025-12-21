@@ -1,0 +1,21 @@
+# NetBeans
+/nbproject/private/
+/build/
+/dist/
+/nbbuild/
+/nbdist/
+/.nb-gradle/
+/.settings/
+/.classpath
+/.project
+/.idea/
+
+# Arquivos compilados
+*.class
+*.jar
+*.war
+*.ear
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
