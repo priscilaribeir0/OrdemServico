@@ -2,6 +2,7 @@ package br.com.infox.telas;
 
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 public class TelaLogin extends javax.swing.JFrame {
@@ -31,11 +32,14 @@ public class TelaLogin extends javax.swing.JFrame {
                     principal.setVisible(true);
                     TelaPrincipal.menuRelatorio.setEnabled(true);
                     TelaPrincipal.cadastroUsuarios.setEnabled(true);
+                    TelaPrincipal.usuarioPrincipal.setText(rs.getString(2));
+                    TelaPrincipal.usuarioPrincipal.setForeground(Color.red);
                     this.dispose();
                 }
                 else {
                     TelaPrincipal principal = new TelaPrincipal();
                     principal.setVisible(true);
+                    TelaPrincipal.usuarioPrincipal.setText(rs.getString(2));
                     this.dispose();
                 }
                 

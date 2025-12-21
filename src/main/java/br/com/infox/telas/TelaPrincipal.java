@@ -7,7 +7,8 @@ package br.com.infox.telas;
 import java.text.DateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
-import br.com.infox.telas.Sobre;
+import br.com.infox.telas.TelaSobre;
+
 
 
 /**
@@ -75,7 +76,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
         painelPrincipalLayout.setVerticalGroup(
             painelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         logotipoPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/logotipo.png"))); // NOI18N
@@ -99,6 +100,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         cadastroUsuarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_DOWN_MASK));
         cadastroUsuarios.setText("Usuários");
         cadastroUsuarios.setEnabled(false);
+        cadastroUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastroUsuariosActionPerformed(evt);
+            }
+        });
         menuCadastro.add(cadastroUsuarios);
 
         menuPrincipal.add(menuCadastro);
@@ -155,14 +161,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(painelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(66, 66, 66)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dataPrincipal)
                             .addComponent(usuarioPrincipal))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(181, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(logotipoPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -175,12 +181,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(usuarioPrincipal)
                 .addGap(31, 31, 31)
                 .addComponent(dataPrincipal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                 .addComponent(logotipoPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(painelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         setSize(new java.awt.Dimension(1016, 609));
@@ -193,8 +200,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void ajudaSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajudaSobreActionPerformed
         // chamando a tela sobre 
-        Sobre TelaSobre  = new Sobre();
-        TelaSobre.setVisible(true);
+        TelaSobre sobre  = new TelaSobre();
+        sobre.setVisible(true);
+        painelPrincipal.add(sobre);
+        
     }//GEN-LAST:event_ajudaSobreActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -220,6 +229,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void painelPrincipalHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_painelPrincipalHierarchyChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_painelPrincipalHierarchyChanged
+
+    private void cadastroUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroUsuariosActionPerformed
+        // as linhas abaixo vão abrir o form TelaUsuario dentro do painelPrincipal
+        TelaUsuario usuario = new TelaUsuario();
+        usuario.setVisible(true);
+        painelPrincipal.add(usuario);
+    }//GEN-LAST:event_cadastroUsuariosActionPerformed
 
 
     /**
@@ -273,6 +289,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem opcoesSair;
     private javax.swing.JDesktopPane painelPrincipal;
     private javax.swing.JMenuItem relatoriosServicos;
-    private javax.swing.JLabel usuarioPrincipal;
+    public static javax.swing.JLabel usuarioPrincipal;
     // End of variables declaration//GEN-END:variables
 }
