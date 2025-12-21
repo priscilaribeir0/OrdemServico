@@ -105,6 +105,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuRelatorio.setText("Relatório");
         menuRelatorio.setEnabled(false);
+        menuRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuRelatorioActionPerformed(evt);
+            }
+        });
 
         relatoriosServicos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_DOWN_MASK));
         relatoriosServicos.setText("Serviços");
@@ -157,7 +162,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dataPrincipal)
                             .addComponent(usuarioPrincipal))
-                        .addContainerGap(181, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(logotipoPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -170,7 +175,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(usuarioPrincipal)
                 .addGap(31, 31, 31)
                 .addComponent(dataPrincipal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(logotipoPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92))
             .addGroup(layout.createSequentialGroup()
@@ -178,7 +183,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(1016, 659));
+        setSize(new java.awt.Dimension(1016, 609));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -188,8 +193,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void ajudaSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajudaSobreActionPerformed
         // chamando a tela sobre 
-        Sobre telaSobre = new Sobre();
-        telaSobre.setVisible(true);
+        Sobre TelaSobre  = new Sobre();
+        TelaSobre.setVisible(true);
     }//GEN-LAST:event_ajudaSobreActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -207,6 +212,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
             System.exit(0);
         }
     }//GEN-LAST:event_opcoesSairActionPerformed
+
+    private void menuRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRelatorioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuRelatorioActionPerformed
 
     private void painelPrincipalHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_painelPrincipalHierarchyChanged
         // TODO add your handling code here:
@@ -260,10 +269,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuCadastro;
     private javax.swing.JMenu menuOpcoes;
     private javax.swing.JMenuBar menuPrincipal;
-    private javax.swing.JMenu menuRelatorio;
+    public static javax.swing.JMenu menuRelatorio;
     private javax.swing.JMenuItem opcoesSair;
     private javax.swing.JDesktopPane painelPrincipal;
-    public static javax.swing.JMenuItem relatoriosServicos;
+    private javax.swing.JMenuItem relatoriosServicos;
     private javax.swing.JLabel usuarioPrincipal;
     // End of variables declaration//GEN-END:variables
 }

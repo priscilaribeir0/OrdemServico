@@ -29,7 +29,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 if (perfil.equals("adm")) {
                     TelaPrincipal principal = new TelaPrincipal();
                     principal.setVisible(true);
-                    TelaPrincipal.relatoriosServicos.setEnabled(true);
+                    TelaPrincipal.menuRelatorio.setEnabled(true);
                     TelaPrincipal.cadastroUsuarios.setEnabled(true);
                     this.dispose();
                 }
