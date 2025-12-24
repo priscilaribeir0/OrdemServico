@@ -43,7 +43,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         }
     }
 
-    // metodo para adiconar usuarios
+    // metodo para adiconar/criar  usuarios no sistema
     private void adicionar() {
         String sql = "insert into tbusuarios(iduser,usuario,fone,login,senha,perfil,cargo) values(?,?,?,?,?,?,?)";
         try {
@@ -60,26 +60,89 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios");
             } else {
 
-            
-            // a linha abaixo atualiza a tabela usuario com os dados do formulario
-            int adicionado = pst.executeUpdate();
-            // a linha abaixo serve de apoio de entendendimento da logica
-            //System.out.println(adicionado);
-            if (adicionado > 0) {
-                JOptionPane.showMessageDialog(null, "Usuário adicionado com sucesso");
-                //as linhas abaixo "limpam" os campos
-                idUsuarioInserir.setText(null);
-                nomeUsuarioInserir.setText(null);
-                telefoneUsuarioInserir.setText(null);
-                loginUsuarioInserir.setText(null);
-                senhaUsuarioInserir.setText(null);
-                cargoUsuarioInserir.setText(null);
-            }
+                // a linha abaixo atualiza a tabela usuario com os dados do formulario
+                int adicionado = pst.executeUpdate();
+                // a linha abaixo serve de apoio de entendendimento da logica
+                //System.out.println(adicionado);
+                if (adicionado > 0) {
+                    JOptionPane.showMessageDialog(null, "Usuário adicionado com sucesso");
+                    //as linhas abaixo "limpam" os campos
+                    idUsuarioInserir.setText(null);
+                    nomeUsuarioInserir.setText(null);
+                    telefoneUsuarioInserir.setText(null);
+                    loginUsuarioInserir.setText(null);
+                    senhaUsuarioInserir.setText(null);
+                    cargoUsuarioInserir.setText(null);
+                }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
 
+    }
+
+    //metodo para alterar/atualizar dados do usuario
+    private void alterar() {
+        String sql = "update tbusuarios set usuario=?, fone=?, login=?, senha=?, perfil=?, cargo=? where iduser=?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(7, idUsuarioInserir.getText());
+            pst.setString(1, nomeUsuarioInserir.getText());
+            pst.setString(2, telefoneUsuarioInserir.getText());
+            pst.setString(3, loginUsuarioInserir.getText());
+            pst.setString(4, senhaUsuarioInserir.getText());
+            pst.setString(5, perfilUsuarioInserir.getSelectedItem().toString());
+            pst.setString(6, cargoUsuarioInserir.getText());
+            //a estrutura abaixo é usada para confirmar a alteração/atualização da tabela
+            if ((idUsuarioInserir.getText().isEmpty()) || (nomeUsuarioInserir.getText().isEmpty()) || (loginUsuarioInserir.getText().isEmpty()) || (senhaUsuarioInserir.getText().isEmpty()) || (cargoUsuarioInserir.getText().isEmpty())) {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios");
+            } else {
+
+                // a linha abaixo atualiza a tabela usuario com os dados do formulario
+                int adicionado = pst.executeUpdate();
+                // a linha abaixo serve de apoio de entendendimento da logica
+                //System.out.println(adicionado);
+                if (adicionado > 0) {
+                    JOptionPane.showMessageDialog(null, "Dados do usuário aletrados com sucesso");
+                    //as linhas abaixo "limpam" os campos
+                    idUsuarioInserir.setText(null);
+                    nomeUsuarioInserir.setText(null);
+                    telefoneUsuarioInserir.setText(null);
+                    loginUsuarioInserir.setText(null);
+                    senhaUsuarioInserir.setText(null);
+                    cargoUsuarioInserir.setText(null);
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    // metodo para remover(deletar) usuarios
+    private void remover() {
+        //a estrutura abaixo confirma a remoção do usuario
+        int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover esse usuário", "Atenção", JOptionPane.YES_NO_OPTION);
+        if (confirma == JOptionPane.YES_NO_OPTION) {
+            String sql = "delete from tbusuarios where iduser=?";
+            try {
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1, idUsuarioInserir.getText());
+                int apagado = pst.executeUpdate();
+                if (apagado > 0) {
+                    JOptionPane.showMessageDialog(null, "Usuário removido com sucesso");
+                    //as linhas abaixo "limpam" os campos
+                    idUsuarioInserir.setText(null);
+                    nomeUsuarioInserir.setText(null);
+                    telefoneUsuarioInserir.setText(null);
+                    loginUsuarioInserir.setText(null);
+                    senhaUsuarioInserir.setText(null);
+                    cargoUsuarioInserir.setText(null);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -178,6 +241,11 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         deleteUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/delete.png"))); // NOI18N
         deleteUsuario.setToolTipText("Remover");
         deleteUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        deleteUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteUsuarioActionPerformed(evt);
+            }
+        });
 
         senhaUsuario1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         senhaUsuario1.setText("Telefone");
@@ -229,11 +297,11 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(readUsuario)
-                        .addGap(82, 82, 82)
+                        .addGap(72, 72, 72)
                         .addComponent(updateUsuario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(63, 63, 63)
                         .addComponent(deleteUsuario)
-                        .addGap(76, 76, 76))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(camposObrigatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -313,8 +381,14 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_readUsuarioActionPerformed
 
     private void updateUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateUsuarioActionPerformed
-        // TODO add your handling code here:
+        // chamando o metodo alterar (atualizar)
+        alterar();
     }//GEN-LAST:event_updateUsuarioActionPerformed
+
+    private void deleteUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUsuarioActionPerformed
+        // chamando o metodo remover(deletar)
+        remover();
+    }//GEN-LAST:event_deleteUsuarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
